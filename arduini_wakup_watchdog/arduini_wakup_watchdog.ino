@@ -23,7 +23,7 @@ void setup() {
 void loop() {
   i++;
   if (i==8){
-    //place to put the code of every cycle , read data from sensor , send it with lora before going to 
+    //place to put the code of every cycle , read data from sensor , just testing
     Serial.println("one minute passed");
     i=0;
     goToSleep();
