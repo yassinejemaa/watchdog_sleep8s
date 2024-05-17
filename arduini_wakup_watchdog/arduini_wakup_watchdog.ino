@@ -3,6 +3,7 @@
 #include <avr/sleep.h>  // AVR library for controlling the sleep modes
 #include <OneWire.h>
 #include <DallasTemperature.h>
+#include<CayenneLPP.h>
 #define ONE_WIRE_BUS 4
 #define sensorPin A0
 #define wetSoil 277   // Define max value we consider soil 'wet'
@@ -13,6 +14,7 @@ const int buttonPin = 3; // Pin connected to the button
 #define TX_PIN 7
 bool i = false;
 bool j = false;
+CayenneLPP lpp(0);
 RTC_DS3231 rtc;
 SoftwareSerial rakSerial(RX_PIN, TX_PIN);
 OneWire  ds(4);
@@ -86,7 +88,7 @@ void enterSleep(){
   rtc.clearAlarm(1);
 
   Serial.println("I'm back!");       // Print message to show we're back
-  sendmessages(mesuring(),mesuretemp());
+  sendTemperature(mesuretemp());
 }
 
 void alarm_ISR() {
@@ -114,7 +116,7 @@ int mesuring(){
   Serial.println();
   return moisture;
 }
-int mesuretemp(){
+float mesuretemp(){
  // call sensors.requestTemperatures() to issue a global temperature 
   // request to all devices on the bus
   Serial.print("Requesting temperatures...");
@@ -139,15 +141,34 @@ return sensors.getTempCByIndex(0);
 
 
 }
-void sendmessages(int a , int b ) {
-    // Send "xxx" to RAK4270
-  rakSerial.println("at+version\r\n");
-  if (rakSerial.available()) {
-    // Read the response from RAK4270
-    String response = rakSerial.readStringUntil('\n');
+void sendTemperature(float temperature) {
+  // Convert temperature to 2-byte hexadecimal string
+  int tempValue = round(temperature*10); // Convert to integer (2534)
+  String hexValue = String(tempValue, HEX); // Convert to hexadecimal (9E2)
 
-    // Print the response to the Serial monitor
+  // Pad with zeros if necessary
+  if (hexValue.length() < 4) {
+    hexValue = "00" + hexValue;
+  }
+
+  // Construct Cayenne LPP payload in hexadecimal format
+  String payload = "0067" + hexValue; // Data Type (67 for temperature), Value (9E2)
+
+  // Construct the AT command with the payload
+  String atCommand = "at+send=lora:1:" + payload;
+  rakSerial.println("at+join");
+  delay(2000);
+  // Send the AT command
+  rakSerial.println(atCommand);
+
+  // Wait for a response
+  delay(3000); // Adjust delay as needed
+
+  // Read and print the response
+  if (rakSerial.available()) {
+    String response = rakSerial.readStringUntil('\n');
     Serial.println(response);
   }
-  delay(250);
+
+  delay(250); // Adjust delay as needed
 }
