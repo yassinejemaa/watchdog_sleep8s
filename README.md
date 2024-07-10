@@ -17,7 +17,9 @@ The DE and RE pins are used to define the direction of information, determining 
 <img src="https://github.com/yassinejemaa/watchdog_sleep8s/assets/120018935/cbcf335b-dd1c-474f-aed8-2e16aef97dc9" width="400" />
 
 The DS18B20 temperature sensor communicates using the 1-Wire protocol.
+
 # Real Time Clock
+
 <img src="https://github.com/yassinejemaa/watchdog_sleep8s/assets/120018935/06cd0284-a0df-472d-a2be-bb0de95ea4ff" width="600" />
 
 
@@ -48,6 +50,7 @@ Our RAK module is ready to send data after performing an AT+join each time. It a
 Example: 00 67 + "temperature value" + 00 02 + "analog value"
 
 In general, the message should be written in this format.
+
 <img src="https://github.com/yassinejemaa/watchdog_sleep8s/assets/120018935/c26c46aa-6d62-4af7-a6f5-2c2495dc09cb" width="400" />
 
 
