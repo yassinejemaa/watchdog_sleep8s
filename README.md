@@ -8,7 +8,7 @@ The sensor must be connected to the RS485 converter via the Data A, Data B, and 
 
 This converter is the same as the one illustrated in the previous figure; the only difference is the output pins.
 
-<img src="https://github.com/yassinejemaa/watchdog_sleep8s/blob/main/assets/120018935/88888b7a-4f8b-4d70-8570-b039deeddf72" width="400" />
+<img src="https://github.com/yassinejemaa/watchdog_sleep8s/assets/120018935/88888b7a-4f8b-4d70-8570-b039deeddf72" width="400" />
 
 The DE and RE pins are used to define the direction of information, determining whether our microcontroller will send or receive data.
 
