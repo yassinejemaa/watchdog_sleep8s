@@ -1,5 +1,5 @@
 # NPK Sensor
-<img src="https://github.com/yassinejemaa/watchdog_sleep8s/blob/main/assets/120018935/eb595ae5-0d62-4633-bc0c-8fd4ae8ea3c9" width="400" />
+<img src="https://github.com/yassinejemaa/watchdog_sleep8s/assets/120018935/06cd0284-a0df-472d-a2be-bb0de95ea4ff" width="400" />
 
 
 The sensor must be connected to the RS485 converter via the Data A, Data B, and GND pins, with an external power supply of 12V. However, in our case, a 5V power supply is necessary for the sensor to function correctly. Before starting the measurements, it is crucial to test the sensor by connecting it to the converter as shown in the figure below. To do this, we will use the CoolTerm software to send hexadecimal frames, which will allow us to verify the sensor's proper operation and ensure that the transmitted data is correct.
